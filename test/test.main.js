@@ -28,7 +28,7 @@ var randu = require( '@stdlib/random-base-randu' );
 var Float64Array = require( '@stdlib/array-float64' );
 var ascending = require( './fixtures/ascending.js' );
 var num2str = require( './fixtures/num2str.js' );
-var gsorthp = require( './../lib/gsorthp.js' );
+var gsorthp = require( './../lib' );
 
 
 // TESTS //
