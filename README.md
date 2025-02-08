@@ -35,25 +35,37 @@ limitations under the License.
 
 > Sort a strided array using heapsort.
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-ext-base-gsorthp
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import gsorthp from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@esm/index.mjs';
+var gsorthp = require( '@stdlib/blas-ext-base-gsorthp' );
 ```
 
-You can also import the following named exports from the package:
+#### gsorthp( N, order, x, strideX )
 
-```javascript
-import { ndarray } from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@esm/index.mjs';
-```
-
-#### gsorthp( N, order, x, stride )
-
-Sorts a strided array `x` using heapsort.
+Sorts a strided array using heapsort.
 
 ```javascript
 var x = [ 1.0, -2.0, 3.0, -4.0 ];
@@ -67,41 +79,36 @@ The function has the following parameters:
 -   **N**: number of indexed elements.
 -   **order**: sort order. If `order < 0.0`, the input strided array is sorted in **decreasing** order. If `order > 0.0`, the input strided array is sorted in **increasing** order. If `order == 0.0`, the input strided array is left unchanged.
 -   **x**: input [`Array`][mdn-array] or [`typed array`][mdn-typed-array].
--   **stride**: index increment.
+-   **strideX**: stride length.
 
-The `N` and `stride` parameters determine which elements in `x` are accessed at runtime. For example, to sort every other element
+The `N` and stride parameters determine which elements in the strided array are accessed at runtime. For example, to sort every other element:
 
 ```javascript
-import floor from 'https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-floor@esm/index.mjs';
-
 var x = [ 1.0, -2.0, 3.0, -4.0 ];
-var N = floor( x.length / 2 );
 
-gsorthp( N, -1.0, x, 2 );
+gsorthp( 2, -1.0, x, 2 );
 // x => [ 3.0, -2.0, 1.0, -4.0 ]
 ```
 
 Note that indexing is relative to the first index. To introduce an offset, use [`typed array`][mdn-typed-array] views.
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
-import floor from 'https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-floor@esm/index.mjs';
+var Float64Array = require( '@stdlib/array-float64' );
 
 // Initial array...
 var x0 = new Float64Array( [ 1.0, 2.0, 3.0, 4.0 ] );
 
 // Create an offset view...
 var x1 = new Float64Array( x0.buffer, x0.BYTES_PER_ELEMENT*1 ); // start at 2nd element
-var N = floor( x0.length/2 );
 
 // Sort every other element...
-gsorthp( N, -1.0, x1, 2 );
+gsorthp( 2, -1.0, x1, 2 );
 // x0 => <Float64Array>[ 1.0, 4.0, 3.0, 2.0 ]
 ```
 
-#### gsorthp.ndarray( N, order, x, stride, offset )
+#### gsorthp.ndarray( N, order, x, strideX, offsetX )
 
-Sorts a strided array `x` using heapsort and alternative indexing semantics.
+Sorts a strided array using heapsort and alternative indexing semantics.
 
 ```javascript
 var x = [ 1.0, -2.0, 3.0, -4.0 ];
@@ -112,9 +119,9 @@ gsorthp.ndarray( x.length, 1.0, x, 1, 0 );
 
 The function has the following additional parameters:
 
--   **offset**: starting index.
+-   **offsetX**: starting index.
 
-While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying `buffer`, the `offset` parameter supports indexing semantics based on a starting index. For example, to access only the last three elements of `x`
+While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying buffer, the offset parameter supports indexing semantics based on a starting index. For example, to access only the last three elements:
 
 ```javascript
 var x = [ 1.0, -2.0, 3.0, -4.0, 5.0, -6.0 ];
@@ -132,6 +139,7 @@ gsorthp.ndarray( 3, 1.0, x, 1, x.length-3 );
 ## Notes
 
 -   If `N <= 0` or `order == 0.0`, both functions return `x` unchanged.
+-   Both functions support array-like objects having getter and setter accessors for array element access (e.g., [`@stdlib/array-base/accessor`][@stdlib/array/base/accessor])
 -   The algorithm distinguishes between `-0` and `+0`. When sorted in increasing order, `-0` is sorted before `+0`. When sorted in decreasing order, `-0` is sorted after `+0`.
 -   The algorithm sorts `NaN` values to the end. When sorted in increasing order, `NaN` values are sorted last. When sorted in decreasing order, `NaN` values are sorted first.
 -   The algorithm has space complexity `O(1)` and time complexity `O(N log2 N)`.
@@ -149,41 +157,17 @@ gsorthp.ndarray( 3, 1.0, x, 1, x.length-3 );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="module">
+```javascript
+var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
+var gsorthp = require( '@stdlib/blas-ext-base-gsorthp' );
 
-import round from 'https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-round@esm/index.mjs';
-import randu from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-randu@esm/index.mjs';
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
-import gsorthp from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@esm/index.mjs';
-
-var rand;
-var sign;
-var x;
-var i;
-
-x = new Float64Array( 10 );
-for ( i = 0; i < x.length; i++ ) {
-    rand = round( randu()*100.0 );
-    sign = randu();
-    if ( sign < 0.5 ) {
-        sign = -1.0;
-    } else {
-        sign = 1.0;
-    }
-    x[ i ] = sign * rand;
-}
+var x = discreteUniform( 10, -100, 100, {
+    'dtype': 'float64'
+});
 console.log( x );
 
 gsorthp( x.length, -1.0, x, -1 );
 console.log( x );
-
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -228,7 +212,7 @@ console.log( x );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
@@ -245,7 +229,7 @@ See [LICENSE][stdlib-license].
 
 ## Copyright
 
-Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
+Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 </section>
 
@@ -295,17 +279,19 @@ Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
 
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
+[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor
+
 [@williams:1964a]: https://doi.org/10.1145/512274.512284
 
 [@floyd:1964a]: https://doi.org/10.1145/355588.365103
 
 <!-- <related-links> -->
 
-[@stdlib/blas/ext/base/dsorthp]: https://github.com/stdlib-js/blas-ext-base-dsorthp/tree/esm
+[@stdlib/blas/ext/base/dsorthp]: https://github.com/stdlib-js/blas-ext-base-dsorthp
 
-[@stdlib/blas/ext/base/gsort2hp]: https://github.com/stdlib-js/blas-ext-base-gsort2hp/tree/esm
+[@stdlib/blas/ext/base/gsort2hp]: https://github.com/stdlib-js/blas-ext-base-gsort2hp
 
-[@stdlib/blas/ext/base/ssorthp]: https://github.com/stdlib-js/blas-ext-base-ssorthp/tree/esm
+[@stdlib/blas/ext/base/ssorthp]: https://github.com/stdlib-js/blas-ext-base-ssorthp
 
 <!-- </related-links> -->
 
