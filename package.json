@@ -1,6 +1,6 @@
 {
   "name": "@stdlib/blas-ext-base-gsorthp",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Sort a strided array using heapsort.",
   "license": "Apache-2.0",
   "author": {
@@ -91,7 +91,6 @@
     "array",
     "ndarray"
   ],
-  "__stdlib__": {},
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/stdlib"
