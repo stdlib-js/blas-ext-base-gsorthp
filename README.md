@@ -35,43 +35,32 @@ limitations under the License.
 
 > Sort a strided array using heapsort.
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-ext-base-gsorthp
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-gsorthp = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@umd/browser.js' )
-```
-The previous example will load the latest bundled code from the umd branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/blas-ext-base-gsorthp/tags). For example,
-
-```javascript
-gsorthp = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@v0.3.0-umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var gsorthp = require( 'path/to/vendor/umd/blas-ext-base-gsorthp/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.gsorthp;
-})();
-</script>
+var gsorthp = require( '@stdlib/blas-ext-base-gsorthp' );
 ```
 
 #### gsorthp( N, order, x, strideX )
@@ -168,14 +157,9 @@ gsorthp.ndarray( 3, 1.0, x, 1, x.length-3 );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
+var gsorthp = require( '@stdlib/blas-ext-base-gsorthp' );
 
 var x = discreteUniform( 10, -100, 100, {
     'dtype': 'float64'
@@ -184,11 +168,6 @@ console.log( x );
 
 gsorthp( x.length, -1.0, x, -1 );
 console.log( x );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -263,8 +242,8 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 [npm-image]: http://img.shields.io/npm/v/@stdlib/blas-ext-base-gsorthp.svg
 [npm-url]: https://npmjs.org/package/@stdlib/blas-ext-base-gsorthp
 
-[test-image]: https://github.com/stdlib-js/blas-ext-base-gsorthp/actions/workflows/test.yml/badge.svg?branch=v0.3.0
-[test-url]: https://github.com/stdlib-js/blas-ext-base-gsorthp/actions/workflows/test.yml?query=branch:v0.3.0
+[test-image]: https://github.com/stdlib-js/blas-ext-base-gsorthp/actions/workflows/test.yml/badge.svg?branch=main
+[test-url]: https://github.com/stdlib-js/blas-ext-base-gsorthp/actions/workflows/test.yml?query=branch:main
 
 [coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/blas-ext-base-gsorthp/main.svg
 [coverage-url]: https://codecov.io/github/stdlib-js/blas-ext-base-gsorthp?branch=main
@@ -300,7 +279,7 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
-[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor/tree/umd
+[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor
 
 [@williams:1964a]: https://doi.org/10.1145/512274.512284
 
@@ -308,11 +287,11 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 <!-- <related-links> -->
 
-[@stdlib/blas/ext/base/dsorthp]: https://github.com/stdlib-js/blas-ext-base-dsorthp/tree/umd
+[@stdlib/blas/ext/base/dsorthp]: https://github.com/stdlib-js/blas-ext-base-dsorthp
 
-[@stdlib/blas/ext/base/gsort2hp]: https://github.com/stdlib-js/blas-ext-base-gsort2hp/tree/umd
+[@stdlib/blas/ext/base/gsort2hp]: https://github.com/stdlib-js/blas-ext-base-gsort2hp
 
-[@stdlib/blas/ext/base/ssorthp]: https://github.com/stdlib-js/blas-ext-base-ssorthp/tree/umd
+[@stdlib/blas/ext/base/ssorthp]: https://github.com/stdlib-js/blas-ext-base-ssorthp
 
 <!-- </related-links> -->
 
