@@ -42,13 +42,18 @@ limitations under the License.
 ## Usage
 
 ```javascript
+import gsorthp from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@deno/mod.js';
+```
+The previous example will load the latest bundled code from the deno branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/blas-ext-base-gsorthp/tags). For example,
+
+```javascript
 import gsorthp from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@v0.3.1-deno/mod.js';
 ```
 
 You can also import the following named exports from the package:
 
 ```javascript
-import { ndarray } from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@v0.3.1-deno/mod.js';
+import { ndarray } from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@deno/mod.js';
 ```
 
 #### gsorthp( N, order, x, strideX )
@@ -147,7 +152,7 @@ gsorthp.ndarray( 3, 1.0, x, 1, x.length-3 );
 
 ```javascript
 import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@deno/mod.js';
-import gsorthp from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@v0.3.1-deno/mod.js';
+import gsorthp from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-gsorthp@deno/mod.js';
 
 var x = discreteUniform( 10, -100, 100, {
     'dtype': 'float64'
