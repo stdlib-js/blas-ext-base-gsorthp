@@ -4,7 +4,7 @@
 
 <section class="release" id="unreleased">
 
-## Unreleased (2026-06-04)
+## Unreleased (2026-06-07)
 
 <section class="commits">
 
@@ -12,6 +12,7 @@
 
 <details>
 
+-   [`cd863cf`](https://github.com/stdlib-js/stdlib/commit/cd863cfcc93259fc77714263c6c8b532c84563a3) - **docs:** propagate recent develop fixes to sibling packages [(#12642)](https://github.com/stdlib-js/stdlib/pull/12642) _(by Philipp Burckhardt)_
 -   [`e74dd95`](https://github.com/stdlib-js/stdlib/commit/e74dd953c73dd0fd149fc24dcee6f1f66847557a) - **refactor:** use `strideX`/`offsetX` parameter names in `blas/ext/base/gsorthp` [(#12539)](https://github.com/stdlib-js/stdlib/pull/12539) _(by Philipp Burckhardt)_
 -   [`859a76e`](https://github.com/stdlib-js/stdlib/commit/859a76ed33db283810c39d81e2b3d41daef0ba80) - **bench:** refactor to use string interpolation in `blas/ext/base` [(#11378)](https://github.com/stdlib-js/stdlib/pull/11378) _(by Karan Anand)_
 -   [`f9d1409`](https://github.com/stdlib-js/stdlib/commit/f9d140985e169d34f4e66bd770dc675ea28588a3) - **docs:** add missing JSDoc comment _(by Athan Reines)_
